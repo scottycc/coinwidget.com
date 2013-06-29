@@ -48,41 +48,29 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-
 		$accepted['currencies'] = ['bitcoin','litecoin'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
-		
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))
 			config.currency = 'bitcoin';
-
 		if (!config.counter || !CoinWidgetCom.in_array(config.counter,$accepted['counters']))
 			config.counter = 'count';
-
 		if (!config.alignment || !CoinWidgetCom.in_array(config.alignment,$accepted['alignment']))
 			config.alignment = 'bl';
-
 		if (typeof config.qrcode != 'boolean')
 			config.qrcode = true;
-
 		if (typeof config.auto_show != 'boolean')
 			config.auto_show = false;
-
 		if (!config.wallet_address)
 			config.wallet_address = 'My '+ config.currency +' wallet_address is missing!';
-
 		if (!config.lbl_button) 
 			config.lbl_button = 'Donate';
-
 		if (!config.lbl_address)
 			config.lbl_address = 'My Bitcoin Address:';
-
 		if (!config.lbl_count)
 			config.lbl_count = 'Donation';
-
 		if (!config.lbl_amount)
 			config.lbl_amount = 'BTC';
-
 		if (typeof config.decimals != 'number' || config.decimals < 0 || config.decimals > 10)
 			config.decimals = 4;
 
@@ -122,7 +110,6 @@ var CoinWidgetCom = {
 	, window_position: function($instance){
 		$config = CoinWidgetCom.config[$instance];
 		coin_window = "#COINWIDGETCOM_WINDOW_"+$instance;
-
 		if ($(coin_window).is(':visible')) {
 			obj = "span[data-coinwidget-instance='"+$instance+"'] > a";
 			/* 	to make alignment relative to the full width of the container instead 
@@ -206,19 +193,16 @@ var CoinWidgetCom = {
   				  + '<a class="COINWIDGETCOM_CLOSER" href="javascript:;" onclick="CoinWidgetCom.hide('+$instance+');" title="Close this window">x</a>'
   				  + '<img class="COINWIDGET_INPUT_ICON" src="'+CoinWidgetCom.source+'icon_'+$config.currency+'.png" width="16" height="16" title="This is a '+$config.currency+' wallet address." />'
 				  ;
-
 			if ($config.counter != 'hide') {
 				$html += '<span class="COINWIDGETCOM_COUNT">0<small>'+$config.lbl_count+'</small></span>'
 				  	  + '<span class="COINWIDGETCOM_AMOUNT end">0.00<small>'+$config.lbl_amount+'</small></span>'
 				  	  ;				  
 			}
-
 			if ($config.qrcode) {
 				$html += '<img class="COINWIDGETCOM_QRCODE" data-coinwidget-instance="'+$instance+'" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="16" height="16" />'
 				  	   + '<img class="COINWIDGETCOM_QRCODE_LARGE" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="111" height="111" />'
 				  	   ;
 			}
-
 			var $div = $('<div></div>');
 			$('body').append($div);
 			$div.attr({
@@ -249,18 +233,13 @@ var CoinWidgetCom = {
 				return;
 			}
 		}
-
 		CoinWidgetCom.window_position($instance);
 		$(coin_window).show();
-
 		$pos = $(coin_window).find('input').position();
-
 		$(coin_window).find('img.COINWIDGET_INPUT_ICON').css({'top':$pos.top+3,'left':$pos.left+3});
 		$(coin_window).find('.COINWIDGETCOM_WALLETURI').css({'top':$pos.top+3,'left':$pos.left+$(coin_window).find('input').outerWidth()+3});
-
 		if ($config.counter != 'hide') {
 			$counters = CoinWidgetCom.counter[$instance];
-			
 			if ($counters == null) {
 				$counters = {
 					count: 0,
@@ -269,12 +248,9 @@ var CoinWidgetCom = {
 			}
 		 	if ($counters.count == null) $counters.count = 0;
 		 	if ($counters.amount == null) $counters.amount = 0;
-
 			$(coin_window).find('.COINWIDGETCOM_COUNT').html($counters.count+ '<small>'+$config.lbl_count+'</small>');
 			$(coin_window).find('.COINWIDGETCOM_AMOUNT').html($counters.amount.toFixed($config.decimals)+ '<small>'+$config.lbl_amount+'</small>');
-		
 		}
-		
 		if (typeof $config.onShow == 'function') 
 			$config.onShow();
 	}
