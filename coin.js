@@ -175,6 +175,11 @@ var CoinWidgetCom = {
 							}
 						});
 					}
+					if (!CoinWidgetCom.counter.length) {
+						setTimeout(function(){
+							CoinWidgetCom.counters();
+						},2500);
+					}
 				}
 			});
 		}
