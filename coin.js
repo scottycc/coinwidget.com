@@ -86,7 +86,7 @@ var CoinWidgetCom = {
 			   render multiple widgets before pinging for counts.
 			*/
 			CoinWidgetCom.build();
-		},300);		
+		},400);		
 	}
 	, build: function(){
 		$containers = $("span[data-coinwidget-instance]");
