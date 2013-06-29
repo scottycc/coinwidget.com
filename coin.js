@@ -161,7 +161,7 @@ var CoinWidgetCom = {
 		});
 		if ($addresses.length) {
 			CoinWidgetCom.loader.script({
-				id: 'COINWIDGETCOM_INFO'
+				id: 'COINWIDGETCOM_INFO'+Math.random()
 				, source: (CoinWidgetCom.source+'lookup.php?data='+$addresses.join('|'))
 				, callback: function(){
 					if (typeof COINWIDGETCOM_DATA == 'object') {
@@ -176,9 +176,7 @@ var CoinWidgetCom = {
 						});
 					}
 					if (!CoinWidgetCom.counter.length) {
-						setTimeout(function(){
-							CoinWidgetCom.counters();
-						},2500);
+						setTimeout(function(){CoinWidgetCom.counters();},2500);
 					}
 				}
 			});
