@@ -175,7 +175,7 @@ var CoinWidgetCom = {
 							}
 						});
 					}
-					if (!CoinWidgetCom.counter.length) {
+					if ($("span[data-coinwidget-instance] > span img").length > 0) {
 						setTimeout(function(){CoinWidgetCom.counters();},2500);
 					}
 				}
