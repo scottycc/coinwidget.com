@@ -329,9 +329,10 @@ var CoinWidgetCom = {
 		}
 		, jquery: function(){
 			if (!window.jQuery && !CoinWidgetCom.loader.loading_jquery) {
+				$prefix = window.location.origin.indexOf('file://')!=-1?'http:':'';
 				CoinWidgetCom.loader.script({
 					id			: 'COINWIDGETCOM_JQUERY'
-					, source 	: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
+					, source 	: $prefix + '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
 					, callback  : function(){
 						CoinWidgetCom.init();
 					}
