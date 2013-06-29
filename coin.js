@@ -291,8 +291,10 @@ var CoinWidgetCom = {
 				document.lastChild.firstChild.appendChild(x);
 			}
 		}
+		, stylesheet_loaded: false
 		, stylesheet: function(){
-			if (!$("#COINWDIGETCOM_STYLESHEET").length) {
+			if (!CoinWidgetCom.loader.stylesheet_loaded) {
+				CoinWidgetCom.loader.stylesheet_loaded = true;
 				var $link = $('<link/>');
 				$("head").append($link);
 				$link.attr({
