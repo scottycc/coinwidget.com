@@ -188,9 +188,12 @@ var CoinWidgetCom = {
 		coin_window = "#COINWIDGETCOM_WINDOW_"+$instance;
 		$(".COINWIDGETCOM_WINDOW").css({'z-index':99999999998});
 		if (!$(coin_window).length) {
+
+			$sel = !navigator.userAgent.match(/iPhone/i)?'onclick="this.select();"':'onclick="prompt(\'Select all and copy:\',\''+$config.wallet_address+'\');"';
+
 			$html = ''
 				  + '<label>'+$config.lbl_address+'</label>'
-				  + '<input type="text" readonly onclick="this.select();" value="'+$config.wallet_address+'" />'
+				  + '<input type="text" readonly '+$sel+'  value="'+$config.wallet_address+'" />'
 				  + '<a class="COINWIDGETCOM_CREDITS" href="http://coinwidget.com/" target="_blank">CoinWidget.com</a>'
   				  + '<a class="COINWIDGETCOM_WALLETURI" href="'+$config.currency.toLowerCase()+':'+$config.wallet_address+'" target="_blank" title="Click here to send this address to your wallet (if your wallet is not compatible you will get an empty page, close the white screen and copy the address by hand)" ><img src="'+CoinWidgetCom.source+'icon_wallet.png" /></a>'
   				  + '<a class="COINWIDGETCOM_CLOSER" href="javascript:;" onclick="CoinWidgetCom.hide('+$instance+');" title="Close this window">x</a>'
