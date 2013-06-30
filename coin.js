@@ -215,7 +215,7 @@ var CoinWidgetCom = {
 				$(this).css({'z-index':99999999999});
 			});
 			if ($config.qrcode) {
-				$(coin_window).find('.COINWIDGETCOM_QRCODE').on('mouseenter click',function(){
+				$(coin_window).find('.COINWIDGETCOM_QRCODE').bind('mouseenter click',function(){
 					$config = CoinWidgetCom.config[$(this).attr('data-coinwidget-instance')];
 					$lrg = $(this).parent().find('.COINWIDGETCOM_QRCODE_LARGE');
 					if ($lrg.is(':visible')) {
@@ -225,7 +225,7 @@ var CoinWidgetCom = {
 					$lrg.attr({
 						src: CoinWidgetCom.source +'qr/?address='+$config.wallet_address
 					}).show();
-				}).on('mouseleave',function(){
+				}).bind('mouseleave',function(){
 					$lrg = $(this).parent().find('.COINWIDGETCOM_QRCODE_LARGE');
 					$lrg.hide();
 				});

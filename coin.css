@@ -45,7 +45,7 @@ THE SOFTWARE.
 .COINWIDGETCOM_CONTAINER > a > img,
 .COINWIDGETCOM_CONTAINER > a > span {display:inline-block;vertical-align:middle;}
 .COINWIDGETCOM_CONTAINER > a > span {margin:0px 3px;color:#444;text-shadow:0px -1px 0px #fff;font-weight:bold;}
-.COINWIDGETCOM_CONTAINER > a > img {margin:0px!important;}
+.COINWIDGETCOM_CONTAINER > a > img {padding:0px;margin:0px!important;border:0px;}
 
 /* window */
 .COINWIDGETCOM_WINDOW {font-family:arial;position:absolute;z-index:99999999998;background:#fff;border:1px solid #ccc;padding:5px 5px 25px 5px;background: #fafafa;background: -moz-linear-gradient(top,  #fafafa 0%, #eeeeee 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#eeeeee));background: -webkit-linear-gradient(top,  #fafafa 0%,#eeeeee 100%);background: -o-linear-gradient(top,  #fafafa 0%,#eeeeee 100%);background: -ms-linear-gradient(top,  #fafafa 0%,#eeeeee 100%);background: linear-gradient(to bottom,  #fafafa 0%,#eeeeee 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#eeeeee',GradientType=0 );border-radius:2px 2px 2px 2px;top:90%;left:45%;}
@@ -82,7 +82,8 @@ THE SOFTWARE.
 .COINWIDGETCOM_WINDOW > input {padding:4px 3px 4px 20px;border-radius:2px 2px 2px 2px;border:1px solid #ccc;display:block;width:210px;font-size:10px;margin-bottom:5px;}
 .COINWIDGETCOM_WINDOW > a.COINWIDGETCOM_CLOSER {position:absolute;top:3px;right:7px;color:#666;font-weight:bold;text-decoration:none;}
 .COINWIDGETCOM_WINDOW > a.COINWIDGETCOM_CLOSER:hover {color:#aaa;}
-.COINWIDGETCOM_WINDOW > img {position:absolute;}
+.COINWIDGETCOM_WINDOW > img {position:absolute;border:none;margin:0px;padding:0px;}
+.COINWIDGETCOM_WINDOW > a img {border:none;margin:0px;padding:0px;}
 .COINWIDGETCOM_WINDOW > a.COINWIDGETCOM_WALLETURI {position:absolute;}
 .COINWIDGETCOM_WINDOW > span {float: left;font-size:12px;font-weight:bold;display: block;width: 115px;text-align: left;border: 1px solid #ffeeb3;background: #fff8ef;text-shadow:0px -1px 0px #fffefa;padding: 5px;margin-right: 4px;box-shadow: inset 1px 1px 0px #fff;color:#444!important;}
 .COINWIDGETCOM_WINDOW > span.end {margin-right:0px;}
