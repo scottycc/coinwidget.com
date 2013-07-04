@@ -110,7 +110,7 @@ var CoinWidgetCom = {
 	, window_position: function($instance){
 		$config = CoinWidgetCom.config[$instance];
 		coin_window = "#COINWIDGETCOM_WINDOW_"+$instance;
-		if ($(coin_window).is(':visible')) {
+
 			obj = "span[data-coinwidget-instance='"+$instance+"'] > a";
 			/* 	to make alignment relative to the full width of the container instead 
 			of just the button change this occurence of $(obj) to $(obj).parent(), 
@@ -143,7 +143,10 @@ var CoinWidgetCom = {
 					$left = $pos.left + $(obj).outerWidth() - $(coin_window).outerWidth();
 					break;
 			}
-			$(coin_window).stop().animate({'z-index':99999999999,'top':$top,'left':$left},150).show();
+		if ($(coin_window).is(':visible')) {
+			$(coin_window).stop().animate({'z-index':99999999999,'top':$top,'left':$left},150);
+		} else {
+			$(coin_window).stop().css({'z-index':99999999998,'top':$top,'left':$left});
 		}
 	}
 	, counter: []
