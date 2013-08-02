@@ -297,7 +297,7 @@ var CoinWidgetCom = {
 				};
 				x.src = obj.source;
 				x.id  = obj.id;
-				document.lastChild.firstChild.appendChild(x);
+				document.getElementsByTagName('head').appendChild(x);
 			}
 		}
 		, stylesheet_loaded: false
