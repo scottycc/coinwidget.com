@@ -43,7 +43,12 @@ var CoinWidgetCom = {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		
+		var $span = document.createElement('span');
+		$span.setAttribute('data-coinwidget-instance', CoinWidgetComCounter);
+		$span.setAttribute('class', 'COINWIDGETCOM_CONTAINER');
+		document.getElementsByTagName('body')[0].appendChild($span);
+		
 		CoinWidgetComCounter++;
 	}
 	, validate: function(config) {
@@ -196,7 +201,7 @@ var CoinWidgetCom = {
 
 			$html = ''
 				  + '<label>'+$config.lbl_address+'</label>'
-				  + '<input type="text" readonly '+$sel+'  value="'+$config.wallet_address+'" />'
+				  + '<input type="text" readonly="readonly" '+$sel+'  value="'+$config.wallet_address+'" />'
 				  + '<a class="COINWIDGETCOM_CREDITS" href="http://coinwidget.com/" target="_blank">CoinWidget.com</a>'
   				  + '<a class="COINWIDGETCOM_WALLETURI" href="'+$config.currency.toLowerCase()+':'+$config.wallet_address+'" target="_blank" title="Click here to send this address to your wallet (if your wallet is not compatible you will get an empty page, close the white screen and copy the address by hand)" ><img src="'+CoinWidgetCom.source+'icon_wallet.png" /></a>'
   				  + '<a class="COINWIDGETCOM_CLOSER" href="javascript:;" onclick="CoinWidgetCom.hide('+$instance+');" title="Close this window">x</a>'
@@ -297,7 +302,7 @@ var CoinWidgetCom = {
 				};
 				x.src = obj.source;
 				x.id  = obj.id;
-				document.lastChild.firstChild.appendChild(x);
+				document.getElementsByTagName("head")[0].appendChild(x);
 			}
 		}
 		, stylesheet_loaded: false
