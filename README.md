@@ -1,7 +1,7 @@
 coinwidget.com
 ==============
 
-*The Bitcoin and Litecoin Donation Button*
+*The Bitcoin, Litecoin, Franko Donation Button*
 
 Visit http://coinwidget.com/ for full documentation, demo, and a link code wizard.
 
@@ -15,17 +15,18 @@ Donations are welcome and will go towards further development of this project as
 
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	FRK: FNHGjAavM3RPqFZ4h3YEqT4uoNxENoY7MX
 
 *Thank you for your support and generosity!*
 
 
 Installation
 ==============
-A. Grab the latest version from GitHub: https://github.com/scottycc/coinwidget.com
+A. Grab the latest version from GitHub: https://github.com/franko-org/coinwidget.com-with-franko-support
 
 B. Open **widget/coin.js** and find:
 
-	source: 'http://coinwidget.com/widget/'
+	source: 'http://frankos.org/widget/'
 
 C. Change the URL portion of this line to your own server/path.
 
