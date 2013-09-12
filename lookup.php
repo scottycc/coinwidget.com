@@ -83,6 +83,20 @@ THE SOFTWARE.
 		  	return $return;
 		}
 	}
+	
+		function get_franko($address) {
+		$return = array();
+		$data = get_request('http://frk.cryptocoinexplorer.com/address/'.$address);
+		if (!empty($data) 
+		  && strstr($data, 'Transactions in: ') 
+		  && strstr($data, 'Received: ')) {
+		  	$return += array(
+				'count' => (int) parse($data,'Transactions in: ','<br />'),
+				'amount' => (float) parse($data,'Received: ','<br />')
+			);
+		  	return $return;
+		}
+	}
 
 	function get_request($url,$timeout=4) {
 		if (function_exists('curl_version')) {
