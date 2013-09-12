@@ -38,7 +38,7 @@ var CoinWidgetComCounter = 0;
 
 if (typeof CoinWidgetCom != 'object')
 var CoinWidgetCom = {
-	source: 'http://frankos.org/widget/'
+	source: 'http://coinwidget.com/widget/'
 	, config: []
 	, go :function(config) {
 		config = CoinWidgetCom.validate(config);
