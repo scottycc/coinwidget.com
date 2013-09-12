@@ -5,6 +5,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	FRK: FE35Ez4oq8jVfEaKJAHTugkkwzVVhuLxVZ
 		~ Thank you!
 
 MIT License (MIT)
