@@ -3,6 +3,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	FRK: FE35Ez4oq8jVfEaKJAHTugkkwzVVhuLxVZ
 		~ Thank you!
 
 ------------
@@ -48,7 +49,7 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin','franko'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))

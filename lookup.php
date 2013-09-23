@@ -5,6 +5,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	FRK: FE35Ez4oq8jVfEaKJAHTugkkwzVVhuLxVZ
 		~ Thank you!
 
 MIT License (MIT)
@@ -50,6 +51,9 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'franko':
+						$response = get_franko($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -73,6 +77,20 @@ THE SOFTWARE.
 	function get_litecoin($address) {
 		$return = array();
 		$data = get_request('http://explorer.litecoin.net/address/'.$address);
+		if (!empty($data) 
+		  && strstr($data, 'Transactions in: ') 
+		  && strstr($data, 'Received: ')) {
+		  	$return += array(
+				'count' => (int) parse($data,'Transactions in: ','<br />'),
+				'amount' => (float) parse($data,'Received: ','<br />')
+			);
+		  	return $return;
+		}
+	}
+	
+		function get_franko($address) {
+		$return = array();
+		$data = get_request('http://frk.cryptocoinexplorer.com/address/'.$address);
 		if (!empty($data) 
 		  && strstr($data, 'Transactions in: ') 
 		  && strstr($data, 'Received: ')) {
