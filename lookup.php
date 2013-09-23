@@ -51,6 +51,9 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'franko':
+						$response = get_franko($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
