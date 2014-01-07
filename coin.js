@@ -43,9 +43,24 @@ var CoinWidgetCom = {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		if((typeof element === 'object' && (element instanceof HTMLElement || $(element).length > 0))||typeof element === 'string' && (element.charAt(0) === '#' || element.charAt(0) === '.' || (function(){element = '#' + element;return true})()) && $(element).length > 0){
-			if($(element).length>1) element = $(element)[0];
-			$(element).replaceWith('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>')
+		if((typeof element === 'object' && (element instanceof HTMLElement || (element instanceof NodeList && element.length > 0) || ( typeof jQuery === 'function' && jQuery(element).length > 0 ))) || (typeof element === 'string' && (( element.charAt(0) === '#' && document.getElementById(element.substr(1)) !== null ) || ( element.charAt(0) === '.' && document.getElementsByClassName(element.substr(1))[0] !== null ) || document.getElementById(element) !== null ) ) ){
+			if (typeof element === 'object'){
+				if(element instanceof NodeList)
+					element = element[0];
+				else if (typeof jQuery === 'function')
+					jQuery(element).replaceWith('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+			} else if (typeof element === 'string'){
+				if (element.charAt(0) === '#' && document.getElementById(element.substr(1)) !== null)
+					element = document.getElementById(element.substr(1));
+				else if (element.charAt(0) === '.' && document.getElementsByClassName(element.substr(1))[0] !== null)
+					element = document.getElementsByClassName(element.substr(1))[0];
+				else
+					element = document.getElementById('element');
+				var newSpan = document.createElement('span');
+				newSpan.setAttribute("data-coinwidget-instance", CoinWidgetComCounter);
+				newSpan.setAttribute("class", "COINWIDGETCOM_CONTAINER");
+				element.parentNode.replaceChild( newSpan, element );
+			}	
 		}else{
 			document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
 		}
