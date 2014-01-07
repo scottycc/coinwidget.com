@@ -43,7 +43,7 @@ var CoinWidgetCom = {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		if((typeof element === 'object' && (element instanceof HTMLElement || $(element).length > 0))||typeof element === 'string' && (element.charAt(0) === '#' || element.charAt(0) === '.' || element = '#' + element) && $(element).length > 0){
+		if((typeof element === 'object' && (element instanceof HTMLElement || $(element).length > 0))||typeof element === 'string' && (element.charAt(0) === '#' || element.charAt(0) === '.' || (function(){element = '#' + element;return true})()) && $(element).length > 0){
 			if($(element).length>1) element = $(element)[0];
 			$(element).replaceWith('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>')
 		}else{
