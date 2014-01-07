@@ -39,11 +39,31 @@ if (typeof CoinWidgetCom != 'object')
 var CoinWidgetCom = {
 	source: 'http://coinwidget.com/widget/'
 	, config: []
-	, go :function(config) {
+	, go :function(config, element) {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		if((typeof element === 'object' && (element instanceof HTMLElement || (element instanceof NodeList && element.length > 0) || ( typeof jQuery === 'function' && jQuery(element).length > 0 ))) || (typeof element === 'string' && (( element.charAt(0) === '#' && document.getElementById(element.substr(1)) !== null ) || ( element.charAt(0) === '.' && document.getElementsByClassName(element.substr(1))[0] !== null ) || document.getElementById(element) !== null ) ) ){
+			if (typeof element === 'object'){
+				if(element instanceof NodeList)
+					element = element[0];
+				else if (typeof jQuery === 'function')
+					jQuery(element).replaceWith('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+			} else if (typeof element === 'string'){
+				if (element.charAt(0) === '#' && document.getElementById(element.substr(1)) !== null)
+					element = document.getElementById(element.substr(1));
+				else if (element.charAt(0) === '.' && document.getElementsByClassName(element.substr(1))[0] !== null)
+					element = document.getElementsByClassName(element.substr(1))[0];
+				else
+					element = document.getElementById('element');
+				var newSpan = document.createElement('span');
+				newSpan.setAttribute("data-coinwidget-instance", CoinWidgetComCounter);
+				newSpan.setAttribute("class", "COINWIDGETCOM_CONTAINER");
+				element.parentNode.replaceChild( newSpan, element );
+			}	
+		}else{
+			document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		}
 		CoinWidgetComCounter++;
 	}
 	, validate: function(config) {
