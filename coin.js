@@ -39,11 +39,16 @@ if (typeof CoinWidgetCom != 'object')
 var CoinWidgetCom = {
 	source: 'http://coinwidget.com/widget/'
 	, config: []
-	, go :function(config) {
+	, go :function(config, element) {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		if((typeof element === 'object' && (element instanceof HTMLElement || $(element).length > 0))||typeof element === 'string' && (element.charAt(0) === '#' || element.charAt(0) === '.' || element = '#' + element) && $(element).length > 0){
+			if($(element).length>1) element = $(element)[0];
+			$(element).replaceWith('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>')
+		}else{
+			document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		}
 		CoinWidgetComCounter++;
 	}
 	, validate: function(config) {
