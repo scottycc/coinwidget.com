@@ -1,7 +1,7 @@
 coinwidget.com
 ==============
 
-*The Bitcoin and Litecoin Donation Button*
+*The Bitcoin, Litecoin and Dogecoin Donation Button*
 
 Visit http://coinwidget.com/ for full documentation, demo, and a link code wizard.
 
@@ -13,8 +13,9 @@ Please help keep this project alive! Tell someone about this widget!
 
 Donations are welcome and will go towards further development of this project as well as other crypto related projects. Use the wallet addresses below to donate. 
 
-	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
-	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+        BTC:  122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
+        LTC:  LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+        DOGE: DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e (donation goes to http://dogechain.info/)
 
 *Thank you for your support and generosity!*
 
