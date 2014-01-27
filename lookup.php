@@ -5,6 +5,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+        DOGE: DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e (donation goes to http://dogechain.info/)
 		~ Thank you!
 
 MIT License (MIT)
@@ -50,6 +51,9 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'dogecoin': 
+						$response = dogecoin($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -73,6 +77,20 @@ THE SOFTWARE.
 	function get_litecoin($address) {
 		$return = array();
 		$data = get_request('http://explorer.litecoin.net/address/'.$address);
+		if (!empty($data) 
+		  && strstr($data, 'Transactions in: ') 
+		  && strstr($data, 'Received: ')) {
+		  	$return += array(
+				'count' => (int) parse($data,'Transactions in: ','<br />'),
+				'amount' => (float) parse($data,'Received: ','<br />')
+			);
+		  	return $return;
+		}
+	}
+
+	function get_dogecoin($address) {
+		$return = array();
+		$data = get_request('http://dogechain.info/address/'.$address.);
 		if (!empty($data) 
 		  && strstr($data, 'Transactions in: ') 
 		  && strstr($data, 'Received: ')) {
