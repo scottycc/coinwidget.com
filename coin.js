@@ -50,15 +50,21 @@ var CoinWidgetCom = {
 		var $accepted = [];
 		$accepted['currencies'] = ['bitcoin','litecoin'];
 		$accepted['counters'] = ['count','amount','hide'];
+		$accepted['amount'] = ['show','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))
 			config.currency = 'bitcoin';
 		if (!config.counter || !CoinWidgetCom.in_array(config.counter,$accepted['counters']))
 			config.counter = 'count';
+		if (!config.amount || !CoinWidgetCom.in_array(config.amount,$accepted['amount']))
+			config.amount = 'show';
 		if (!config.alignment || !CoinWidgetCom.in_array(config.alignment,$accepted['alignment']))
 			config.alignment = 'bl';
 		if (typeof config.qrcode != 'boolean')
 			config.qrcode = true;
+		if (typeof config.milli != 'boolean') {
+			config.milli = false;
+		}
 		if (typeof config.auto_show != 'boolean')
 			config.auto_show = false;
 		if (!config.wallet_address)
@@ -172,7 +178,7 @@ var CoinWidgetCom = {
 						$.each(CoinWidgetCom.counter,function(i,v){
 							$config = CoinWidgetCom.config[i];
 							if (!v.count || v == null) v = {count:0,amount:0};
-							$("span[data-coinwidget-instance='"+i+"']").find('> span').html($config.counter=='count'?v.count:(v.amount.toFixed($config.decimals)+' '+$config.lbl_amount));
+							$("span[data-coinwidget-instance='"+i+"']").find('> span').html($config.counter=='count'?v.count:((v.amount*($config.milli ? 1000 : 1)).toFixed($config.decimals)+' '+($config.milli ? 'm':'')+$config.lbl_amount));
 							if ($config.auto_show) {
 								$("span[data-coinwidget-instance='"+i+"']").find('> a').click();
 							}
@@ -203,9 +209,10 @@ var CoinWidgetCom = {
   				  + '<img class="COINWIDGET_INPUT_ICON" src="'+CoinWidgetCom.source+'icon_'+$config.currency+'.png" width="16" height="16" title="This is a '+$config.currency+' wallet address." />'
 				  ;
 			if ($config.counter != 'hide') {
-				$html += '<span class="COINWIDGETCOM_COUNT">0<small>'+$config.lbl_count+'</small></span>'
-				  	  + '<span class="COINWIDGETCOM_AMOUNT end">0.00<small>'+$config.lbl_amount+'</small></span>'
-				  	  ;				  
+				$html += '<span class="COINWIDGETCOM_COUNT">0<small>'+$config.lbl_count+'</small></span>';
+				if ($config.amount != 'hide') {
+					$html += '<span class="COINWIDGETCOM_AMOUNT end">0.00<small>'+($config.milli ? 'm':'')+$config.lbl_amount+'</small></span>';
+				}
 			}
 			if ($config.qrcode) {
 				$html += '<img class="COINWIDGETCOM_QRCODE" data-coinwidget-instance="'+$instance+'" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="16" height="16" />'
@@ -258,7 +265,9 @@ var CoinWidgetCom = {
 		 	if ($counters.count == null) $counters.count = 0;
 		 	if ($counters.amount == null) $counters.amount = 0;
 			$(coin_window).find('.COINWIDGETCOM_COUNT').html($counters.count+ '<small>'+$config.lbl_count+'</small>');
-			$(coin_window).find('.COINWIDGETCOM_AMOUNT').html($counters.amount.toFixed($config.decimals)+ '<small>'+$config.lbl_amount+'</small>');
+			if ($config.amount != 'hide') {
+				$(coin_window).find('.COINWIDGETCOM_AMOUNT').html(($counters.amount*($config.milli ? 1000 : 1)).toFixed($config.decimals)+ '<small>'+($config.milli ? 'm':'')+$config.lbl_amount+'</small>');
+			}
 		}
 		if (typeof $config.onShow == 'function') 
 			$config.onShow();
