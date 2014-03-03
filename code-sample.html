@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="en">
-<body>
-	
+<head>
 	<script src="coin.js"></script>
+</head>
+
+<body>
+
 	<script>
 	CoinWidgetCom.go({
 
@@ -18,6 +21,60 @@
 		, lbl_address: "Donate Bitcoin to this Address:"
 		, lbl_count: "donations"
 		, lbl_amount: "BTC"
+	});
+	</script>
+
+	<script>
+	CoinWidgetCom.go({
+
+		/* make sure you update the wallet_address or you will not get your donations */
+		wallet_address: "LSDfnNqDn9U3fa4UNTkenfePqdt9JSTopt"
+
+		, currency: "litecoin"
+		, counter: "count"
+		, alignment: "bl"
+		, qrcode: true
+		, auto_show: false
+		, lbl_button: "Donate"
+		, lbl_address: "Donate Litecoin to this Address:"
+		, lbl_count: "donations"
+		, lbl_amount: "LTC"
+	});
+	</script>
+
+	<script>
+	CoinWidgetCom.go({
+
+		/* make sure you update the wallet_address or you will not get your donations */
+		wallet_address: "DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi"
+
+		, currency: "dogecoin"
+		, counter: "count"
+		, alignment: "bl"
+		, qrcode: true
+		, auto_show: false
+		, lbl_button: "Donate"
+		, lbl_address: "Donate Dogecoin to this Address:"
+		, lbl_count: "donations"
+		, lbl_amount: "DOGE"
+	});
+	</script>
+
+	<script>
+	CoinWidgetCom.go({
+
+		/* make sure you update the wallet_address or you will not get your donations */
+		wallet_address: "AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2"
+
+		, currency: "auroracoin"
+		, counter: "count"
+		, alignment: "bl"
+		, qrcode: true
+		, auto_show: false
+		, lbl_button: "Donate"
+		, lbl_address: "Donate AuroraCoin to this Address:"
+		, lbl_count: "donations"
+		, lbl_amount: "AUR"
 	});
 	</script>
 

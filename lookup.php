@@ -3,13 +3,15 @@
 /** -
 
 Donations welcome:
-	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
-	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	BTC:  122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
+	LTC:  LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	DOGE: DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi
+	AUR:  AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2
 		~ Thank you!
 
 MIT License (MIT)
 
-Copyright (c) 2013 http://coinwidget.com/ 
+Copyright (c) 2013 http://coinwidget.com/
 Copyright (c) 2013 http://scotty.cc/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,16 +41,27 @@ THE SOFTWARE.
 	$data = isset($_GET['data'])?$_GET['data']:'';
 	if (!empty($data)) {
 		$data = explode("|", $data);
-		$responses = array();
+
+ 		$responses = array();
 		if (!empty($data)) {
 			foreach ($data as $key) {
 				list($instance,$currency,$address) = explode('_',$key);
+
 				switch ($currency) {
-					case 'bitcoin': 
+					case 'bitcoin':
 						$response = get_bitcoin($address);
 						break;
-					case 'litecoin': 
+
+					case 'litecoin':
 						$response = get_litecoin($address);
+						break;
+
+					case 'dogecoin':
+						$response = get_dogecoin($address);
+						break;
+
+					case 'auroracoin':
+						$response = get_auroracoin($address);
 						break;
 				}
 				$responses[$instance] = $response;
@@ -73,14 +86,50 @@ THE SOFTWARE.
 	function get_litecoin($address) {
 		$return = array();
 		$data = get_request('http://explorer.litecoin.net/address/'.$address);
-		if (!empty($data) 
-		  && strstr($data, 'Transactions in: ') 
+		if (!empty($data)
+		  && strstr($data, 'Transactions in: ')
 		  && strstr($data, 'Received: ')) {
 		  	$return += array(
 				'count' => (int) parse($data,'Transactions in: ','<br />'),
 				'amount' => (float) parse($data,'Received: ','<br />')
 			);
 		  	return $return;
+		}
+	}
+
+	function get_dogecoin($address){
+		$return = array();
+		$data = get_request('http://dogechain.info/chain/Dogecoin/q/getreceivedbyaddress/'.$address);
+		if (strlen($data) > 0) {
+		  	$return += array(
+		  	'count' => 0,
+				'amount' => (float) $data
+			);
+		  	return $return;
+		}
+	}
+
+	function get_auroracoin($address) {
+		$return = array();
+		$data = get_request('https://aur.cryptocoins.at/explorer/address/'.$address);
+
+		if( !empty($data)
+		  && strstr($data, 'Address not seen on the network') ) {
+			$return += array(
+				'count' => 0,
+				'amount' => 0.0
+			);
+		} else {
+
+			if (!empty($data)
+			  && strstr($data, 'Transactions in: ')
+			  && strstr($data, 'Received: ')) {
+			  	$return += array(
+					'count' => (int) parse($data,'Transactions in: ','<br />'),
+					'amount' => (float) parse($data,'Received: ','<br />')
+				);
+			  	return $return;
+			}
 		}
 	}
 

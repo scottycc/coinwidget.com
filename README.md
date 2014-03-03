@@ -15,6 +15,8 @@ Donations are welcome and will go towards further development of this project as
 
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	DOGE: DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi
+	AUR:  AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2
 
 *Thank you for your support and generosity!*
 
