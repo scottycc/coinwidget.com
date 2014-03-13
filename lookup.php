@@ -84,6 +84,10 @@ THE SOFTWARE.
  						$response = get_flappycoin($address);
  						break;
 
+ 					case 'peercoin':
+ 						$response = get_peercoin($address);
+ 						break;
+
  					/* TeslaCoin will be added once a block explorer is available
  					case 'teslacoin':
  						$response = get_teslacoin($address);
@@ -213,6 +217,19 @@ THE SOFTWARE.
  		  	return $return;
  		}
  	}
+
+ 	function get_peercoin($address) {
+		$return = array();
+		$data = get_request('http://ppc.blockr.io/api/v1/address/info/'.$address);
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->nb_txs,
+				'amount' => (float) $data->totalreceived
+			);
+			return $return;
+		}
+	}
 
  	/* TeslaCoin will be added once a block explorer is available
  	function get_teslatocoin($address) {
