@@ -3,6 +3,12 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+  DOGE: DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi
+	AUR:  AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2
+	FRK:  FASkP9GTQJYbpF2wLXrtQRf2WsqKVa83z2
+	VERT: VpFCVSevgz9kiRaJggPgCFMWuAaj6S9GxC
+	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
+	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
 		~ Thank you!
 
 ------------
@@ -51,7 +57,7 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin', 'franko'];
+		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin', 'franko', 'vertcoin', 'flappycoin', 'lottocoin'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['amount'] = ['show','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];

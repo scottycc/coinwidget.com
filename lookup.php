@@ -7,6 +7,10 @@ Donations welcome:
 	LTC:  LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
 	DOGE: DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi
 	AUR:  AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2
+	FRK:  FASkP9GTQJYbpF2wLXrtQRf2WsqKVa83z2
+	VERT: VpFCVSevgz9kiRaJggPgCFMWuAaj6S9GxC
+	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
+	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
 		~ Thank you!
 
 MIT License (MIT)
@@ -67,6 +71,23 @@ THE SOFTWARE.
 					case 'franko':
  						$response = get_franko($address);
  						break;
+
+ 					case 'vertcoin':
+ 						$response = get_vertcoin($address);
+ 						break;
+
+ 					case 'lottocoin':
+ 						$response = get_lottocoin($address);
+ 						break;
+
+ 					case 'flappycoin':
+ 						$response = get_flappycoin($address);
+ 						break;
+
+ 					/* TeslaCoin will be added once a block explorer is available
+ 					case 'teslacoin':
+ 						$response = get_teslacoin($address);
+ 						break; */
 				}
 				$responses[$instance] = $response;
 			}
@@ -150,6 +171,64 @@ THE SOFTWARE.
  		  	return $return;
  		}
  	}
+
+ 	function get_vertcoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://explorer.vertcoin.org/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
+ 	function get_lottocoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://lottocoin.info/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
+ 	function get_flappycoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://flapplorer.flappycoin.info/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
+ 	/* TeslaCoin will be added once a block explorer is available
+ 	function get_teslatocoin($address) {
+ 		$return = array();
+ 		$data = get_request('http:// /address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	} */
+
 
 	function get_request($url,$timeout=4) {
 		if (function_exists('curl_version')) {
