@@ -43,22 +43,31 @@ var CoinWidgetCom = {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
+		var $span = document.createElement('span');
+ 		$span.setAttribute('data-coinwidget-instance', CoinWidgetComCounter);
+ 		$span.setAttribute('class', 'COINWIDGETCOM_CONTAINER');
+ 		document.getElementsByTagName('body')[0].appendChild($span);
 		CoinWidgetComCounter++;
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin', 'franko'];
 		$accepted['counters'] = ['count','amount','hide'];
+		$accepted['amount'] = ['show','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))
 			config.currency = 'bitcoin';
 		if (!config.counter || !CoinWidgetCom.in_array(config.counter,$accepted['counters']))
 			config.counter = 'count';
+		if (!config.amount || !CoinWidgetCom.in_array(config.amount,$accepted['amount']))
+			config.amount = 'show';
 		if (!config.alignment || !CoinWidgetCom.in_array(config.alignment,$accepted['alignment']))
 			config.alignment = 'bl';
 		if (typeof config.qrcode != 'boolean')
 			config.qrcode = true;
+		if (typeof config.milli != 'boolean') {
+			config.milli = false;
+ 		}
 		if (typeof config.auto_show != 'boolean')
 			config.auto_show = false;
 		if (!config.wallet_address)
@@ -172,8 +181,8 @@ var CoinWidgetCom = {
 						$.each(CoinWidgetCom.counter,function(i,v){
 							$config = CoinWidgetCom.config[i];
 
-							if (v == null){ v = {count:0,amount:0}; }
-							$("span[data-coinwidget-instance='"+i+"']").find('> span').html($config.counter=='count'?v.count:(v.amount.toFixed($config.decimals)+' '+$config.lbl_amount));
+							if (v == null || !v.count){ v = {count:0,amount:0}; }
+							$("span[data-coinwidget-instance='"+i+"']").find('> span').html($config.counter=='count'?v.count:((v.amount*($config.milli ? 1000 : 1)).toFixed($config.decimals)+' '+($config.milli ? 'm':'')+$config.lbl_amount));
 							if ($config.auto_show) {
 								$("span[data-coinwidget-instance='"+i+"']").find('> a').click();
 							}
@@ -197,20 +206,21 @@ var CoinWidgetCom = {
 
 			$html = ''
 				  + '<label>'+$config.lbl_address+'</label>'
-				  + '<input type="text" readonly '+$sel+'  value="'+$config.wallet_address+'" />'
+				  + '<input type="text" readonly="readonly" '+$sel+'  value="'+$config.wallet_address+'" />'
 				  + '<a class="COINWIDGETCOM_CREDITS" href="http://coinwidget.com/" target="_blank">CoinWidget.com</a>'
-  				  + '<a class="COINWIDGETCOM_WALLETURI" href="'+$config.currency.toLowerCase()+':'+$config.wallet_address+'" target="_blank" title="Click here to send this address to your wallet (if your wallet is not compatible you will get an empty page, close the white screen and copy the address by hand)" ><img src="'+CoinWidgetCom.source+'icon_wallet.png" /></a>'
+  				  + '<a class="COINWIDGETCOM_WALLETURI" href="'+$config.currency.toLowerCase()+':'+$config.wallet_address+'" target="_blank" title="Click here to send this address to your wallet (if your wallet is not compatible you will get an empty page, close the white screen and copy the address by hand)" ><img src="'+CoinWidgetCom.source+'icon_wallet.png" alt="Send '+$config.currency+' to address" /></a>'
   				  + '<a class="COINWIDGETCOM_CLOSER" href="javascript:;" onclick="CoinWidgetCom.hide('+$instance+');" title="Close this window">x</a>'
-  				  + '<img class="COINWIDGET_INPUT_ICON" src="'+CoinWidgetCom.source+'icon_'+$config.currency+'.png" width="16" height="16" title="This is a '+$config.currency+' wallet address." />'
+  				  + '<img class="COINWIDGET_INPUT_ICON" src="'+CoinWidgetCom.source+'icon_'+$config.currency+'.png" width="16" height="16" title="This is a '+$config.currency+' wallet address." alt="'+$config.currency+' Logo" />'
 				  ;
 			if ($config.counter != 'hide') {
-				$html += '<span class="COINWIDGETCOM_COUNT">0<small>'+$config.lbl_count+'</small></span>'
-				  	  + '<span class="COINWIDGETCOM_AMOUNT end">0.00<small>'+$config.lbl_amount+'</small></span>'
-				  	  ;
+				$html += '<span class="COINWIDGETCOM_COUNT">0<small>'+$config.lbl_count+'</small></span>';
+ 				if ($config.amount != 'hide') {
+ 					$html += '<span class="COINWIDGETCOM_AMOUNT end">0.00<small>'+($config.milli ? 'm':'')+$config.lbl_amount+'</small></span>';
+ 				}
 			}
 			if ($config.qrcode) {
 				$html += '<img class="COINWIDGETCOM_QRCODE" data-coinwidget-instance="'+$instance+'" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="16" height="16" />'
-				  	   + '<img class="COINWIDGETCOM_QRCODE_LARGE" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="111" height="111" />'
+				  	   + '<img class="COINWIDGETCOM_QRCODE_LARGE" src="'+CoinWidgetCom.source+'icon_qrcode.png" width="111" height="111" alt="'+$config.currency+' address QR code" />'
 				  	   ;
 			}
 			var $div = $('<div></div>');
@@ -259,7 +269,9 @@ var CoinWidgetCom = {
 		 	if ($counters.count == null) $counters.count = 0;
 		 	if ($counters.amount == null) $counters.amount = 0;
 			$(coin_window).find('.COINWIDGETCOM_COUNT').html($counters.count+ '<small>'+$config.lbl_count+'</small>');
-			$(coin_window).find('.COINWIDGETCOM_AMOUNT').html($counters.amount.toFixed($config.decimals)+ '<small>'+$config.lbl_amount+'</small>');
+			if ($config.amount != 'hide') {
+ 				$(coin_window).find('.COINWIDGETCOM_AMOUNT').html(($counters.amount*($config.milli ? 1000 : 1)).toFixed($config.decimals)+ '<small>'+($config.milli ? 'm':'')+$config.lbl_amount+'</small>');
+ 			}
 		}
 		if (typeof $config.onShow == 'function')
 			$config.onShow();
@@ -298,7 +310,8 @@ var CoinWidgetCom = {
 				};
 				x.src = obj.source;
 				x.id  = obj.id;
-				document.lastChild.firstChild.appendChild(x);
+				//document.lastChild.firstChild.appendChild(x);
+				document.body.appendChild(x)
 			}
 		}
 		, stylesheet_loaded: false

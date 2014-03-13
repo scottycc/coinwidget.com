@@ -63,6 +63,10 @@ THE SOFTWARE.
 					case 'auroracoin':
 						$response = get_auroracoin($address);
 						break;
+
+					case 'franko':
+ 						$response = get_franko($address);
+ 						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -132,6 +136,20 @@ THE SOFTWARE.
 			}
 		}
 	}
+
+	function get_franko($address) {
+ 		$return = array();
+ 		$data = get_request('http://frk.cryptocoinexplorer.com/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
 
 	function get_request($url,$timeout=4) {
 		if (function_exists('curl_version')) {
