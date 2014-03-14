@@ -1,7 +1,7 @@
 coinwidget.com
 ==============
 
-The Bitcoin, Litecoin, Dogecoin, Auroracoin, Franko, Vertcoin, LottoCoin, FlappyCoin and PeerCoin Donation Button
+The Bitcoin, Litecoin, Dogecoin, Auroracoin, Franko, Vertcoin, LottoCoin, FlappyCoin, PeerCoin, NyanCoin, FeatherCoin and FedoraCoin Donation Button
 
 Visit http://coinwidget.com/ for full documentation, demo, and a link code wizard.
 
@@ -23,6 +23,9 @@ well as other crypto related projects. Use the wallet addresses below to donate.
 	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
 	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
 	PPC:  PPrZC8NTbBMqc2ijw2ji8cX6mQg8zcKtqD
+	NYAN: KSXcP3vmQDDeMrUAqzeKWb7cgAGhZrfaYq
+	FTC:  6uAaYag6YkcnmNaVz4pM25ZdU7w9chVT6a
+	TiPS: Ea6nP2tzwn55ut2ryYMZsSZbyUo6pYvNSL
 
 
 Thank you for your support and generosity!
