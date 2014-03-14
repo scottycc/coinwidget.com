@@ -1,7 +1,7 @@
 coinwidget.com
 ==============
 
-*The Bitcoin and Litecoin Donation Button*
+*The Bitcoin, Litecoin, Dogecoin, Auroracoin, Franko, Vertcoin, LottoCoin, FlappyCoin, PeerCoin, FeatherCoin and FedoraCoin Donation Button*
 
 Visit http://coinwidget.com/ for full documentation, demo, and a link code wizard.
 
@@ -9,12 +9,22 @@ CoinWidget was created by http://scotty.cc/ (hire me for your next project!)
 
 Released under the Open Source **MIT License** (see **LICENSE** file for details).
 
-Please help keep this project alive! Tell someone about this widget! 
+Please help keep this project alive! Tell someone about this widget!
 
-Donations are welcome and will go towards further development of this project as well as other crypto related projects. Use the wallet addresses below to donate. 
+Donations are welcome and will go towards further development of this project as well as other crypto related projects. Use the wallet addresses below to donate.
 
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	DOGE: DE1M61so1Agsx2wLhsKw474Pbq4c7T72Vi
+	AUR:  AbyQ4MEW46b79h72Fj9uP12odVq7gVaJy2
+	FRK:  FASkP9GTQJYbpF2wLXrtQRf2WsqKVa83z2
+	VERT: VpFCVSevgz9kiRaJggPgCFMWuAaj6S9GxC
+	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
+	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
+	PPC:  PPrZC8NTbBMqc2ijw2ji8cX6mQg8zcKtqD
+	NYAN: KSXcP3vmQDDeMrUAqzeKWb7cgAGhZrfaYq
+	FTC:  6uAaYag6YkcnmNaVz4pM25ZdU7w9chVT6a
+	TiPS: Ea6nP2tzwn55ut2ryYMZsSZbyUo6pYvNSL
 
 *Thank you for your support and generosity!*
 
