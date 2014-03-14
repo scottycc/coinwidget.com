@@ -11,6 +11,9 @@ Donations welcome:
 	VERT: VpFCVSevgz9kiRaJggPgCFMWuAaj6S9GxC
 	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
 	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
+	NYAN: KSXcP3vmQDDeMrUAqzeKWb7cgAGhZrfaYq
+	FTC:  6uAaYag6YkcnmNaVz4pM25ZdU7w9chVT6a
+	TiPS: Ea6nP2tzwn55ut2ryYMZsSZbyUo6pYvNSL
 		~ Thank you!
 
 MIT License (MIT)
@@ -86,6 +89,18 @@ THE SOFTWARE.
 
  					case 'peercoin':
  						$response = get_peercoin($address);
+ 						break;
+
+ 					case 'nyancoin':
+ 						$response = get_nyancoin($address);
+ 						break;
+
+ 					case 'feathercoin':
+ 						$response = get_feathercoin($address);
+ 						break;
+
+ 					case 'fedoracoin':
+ 						$response = get_fedoracoin($address);
  						break;
 
  					/* TeslaCoin will be added once a block explorer is available
@@ -230,6 +245,49 @@ THE SOFTWARE.
 			return $return;
 		}
 	}
+
+	function get_nyancoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://nyancha.in/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
+ 	function get_feathercoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://explorer.feathercoin.com/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
+ 	function get_fedoracoin($address) {
+ 		$return = array();
+ 		$data = get_request('http://fedoracha.in/address/'.$address);
+ 		if (!empty($data)
+ 		  && strstr($data, 'Transactions in: ')
+ 		  && strstr($data, 'Received: ')) {
+ 		  	$return += array(
+ 				'count' => (int) parse($data,'Transactions in: ','<br />'),
+ 				'amount' => (float) parse($data,'Received: ','<br />')
+ 			);
+ 		  	return $return;
+ 		}
+ 	}
+
 
  	/* TeslaCoin will be added once a block explorer is available
  	function get_teslatocoin($address) {

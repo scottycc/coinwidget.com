@@ -9,6 +9,7 @@ Donations welcome:
 	VERT: VpFCVSevgz9kiRaJggPgCFMWuAaj6S9GxC
 	LOT:  LyUWd7VsavSs5pvodChTAFA6K5oaR1RkSF
 	FLAP: FNUxuLfSArrZQEz7rte5xT3Cu3TvkmPi7c
+  NYAN: KSXcP3vmQDDeMrUAqzeKWb7cgAGhZrfaYq
 		~ Thank you!
 
 ------------
@@ -49,15 +50,19 @@ var CoinWidgetCom = {
 		config = CoinWidgetCom.validate(config);
 		CoinWidgetCom.config[CoinWidgetComCounter] = config;
 		CoinWidgetCom.loader.jquery();
-		var $span = document.createElement('span');
+		// Bottom of <body>
+		/* var $span = document.createElement('span');
  		$span.setAttribute('data-coinwidget-instance', CoinWidgetComCounter);
  		$span.setAttribute('class', 'COINWIDGETCOM_CONTAINER');
- 		document.getElementsByTagName('body')[0].appendChild($span);
+ 		document.getElementsByTagName('body')[0].appendChild($span); */
+
+ 		// Exactly where the <script> tag is located
+ 		document.write('<span data-coinwidget-instance="'+CoinWidgetComCounter+'" class="COINWIDGETCOM_CONTAINER"></span>');
 		CoinWidgetComCounter++;
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin', 'franko', 'vertcoin', 'flappycoin', 'lottocoin', 'peercoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin', 'dogecoin', 'auroracoin', 'franko', 'vertcoin', 'flappycoin', 'lottocoin', 'peercoin', 'nyancoin', 'feathercoin', 'fedoracoin'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['amount'] = ['show','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
