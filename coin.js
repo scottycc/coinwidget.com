@@ -230,6 +230,7 @@ var CoinWidgetCom = {
 					}
 					$lrg.attr({
 						src: CoinWidgetCom.source +'qr/?address='+$config.wallet_address
+						// src: "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl="+$config.currency+":"+$config.wallet_address
 					}).show();
 				}).bind('mouseleave',function(){
 					$lrg = $(this).parent().find('.COINWIDGETCOM_QRCODE_LARGE');
