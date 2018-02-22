@@ -53,6 +53,9 @@ THE SOFTWARE.
 					case 'dash': 
 						$response = get_dash($address);
 						break;
+					case 'ethereum': 
+						$response = get_ethereum($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -95,6 +98,19 @@ THE SOFTWARE.
 			$return += array(
 				'count' => (int) $data->transactionCount,
 				'amount' => (float) $data->balance
+			);
+			return $return;
+		}
+	}
+	
+	function get_ethereum($address) {
+		$return = array();
+		$data = get_request('https://api.ethplorer.io/getAddressInfo/'.$address.'?apiKey=freekey');
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->countTxs,
+				'amount' => (float) $data->ETH->balance
 			);
 			return $return;
 		}
