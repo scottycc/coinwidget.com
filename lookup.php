@@ -50,6 +50,12 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'dash': 
+						$response = get_dash($address);
+						break;
+					case 'ethereum': 
+						$response = get_ethereum($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -83,6 +89,32 @@ THE SOFTWARE.
 		  	return $return;
 		}
 	}
+	
+	function get_dash($address) {
+		$return = array();
+		$data = get_request('https://prohashing.com/explorerJson/getAddress?coin_id=42&address='.$address);
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->transactionCount,
+				'amount' => (float) $data->balance
+			);
+			return $return;
+		}
+	}
+	
+	function get_ethereum($address) {
+		$return = array();
+		$data = get_request('https://api.ethplorer.io/getAddressInfo/'.$address.'?apiKey=freekey');
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->countTxs,
+				'amount' => (float) $data->ETH->balance
+			);
+			return $return;
+		}
+	}
 
 	function get_request($url,$timeout=4) {
 		if (function_exists('curl_version')) {
@@ -92,6 +124,7 @@ THE SOFTWARE.
 			curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($curl, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13');
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 			$return = curl_exec($curl);
 			curl_close($curl);
 			return $return;

@@ -48,7 +48,7 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin','dash','ethereum'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))
@@ -230,6 +230,7 @@ var CoinWidgetCom = {
 					}
 					$lrg.attr({
 						src: CoinWidgetCom.source +'qr/?address='+$config.wallet_address
+						// src: "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl="+$config.currency+":"+$config.wallet_address
 					}).show();
 				}).bind('mouseleave',function(){
 					$lrg = $(this).parent().find('.COINWIDGETCOM_QRCODE_LARGE');
