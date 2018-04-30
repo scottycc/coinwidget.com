@@ -3,6 +3,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	BTX: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 		~ Thank you!
 
 ------------
@@ -37,7 +38,7 @@ var CoinWidgetComCounter = 0;
 
 if (typeof CoinWidgetCom != 'object')
 var CoinWidgetCom = {
-	source: 'http://coinwidget.com/widget/'
+	source: 'https://bitcore.cc/wiwi/'
 	, config: []
 	, go :function(config) {
 		config = CoinWidgetCom.validate(config);
@@ -48,7 +49,7 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin','bitcore'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))

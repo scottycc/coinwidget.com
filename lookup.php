@@ -5,6 +5,7 @@
 Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	BTX: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 		~ Thank you!
 
 MIT License (MIT)
@@ -50,6 +51,9 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'bitcore': 
+						$response = get_bitcore($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -84,6 +88,19 @@ THE SOFTWARE.
 		}
 	}
 
+	function get_bitcore($address) {
+		$return = array();
+		$data = get_request('https://insight.bitcore.cc/api/addr/'.$address);
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->txApperances,
+				'amount' => (float) $data->balance
+			);
+			return $return;
+		}
+	}
+
 	function get_request($url,$timeout=4) {
 		if (function_exists('curl_version')) {
 			$curl = curl_init();
@@ -91,6 +108,7 @@ THE SOFTWARE.
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 			curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($curl, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13');
 			$return = curl_exec($curl);
 			curl_close($curl);

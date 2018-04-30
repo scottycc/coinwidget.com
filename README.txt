@@ -1,7 +1,7 @@
 coinwidget.com
 ==============
 
-The Bitcoin and Litecoin Donation Button
+The Bitcoin, Litecoin & Bitcore Donation Button
 
 Visit http://coinwidget.com/ for full documentation, demo, and a link code wizard.
 
@@ -16,6 +16,7 @@ well as other crypto related projects. Use the wallet addresses below to donate.
 
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
+	BTX: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 
 Thank you for your support and generosity!
 
